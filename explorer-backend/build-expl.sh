@@ -1,1 +1,1 @@
-explor-backend/gradlew clean build -x test
+explorer-backend/gradlew clean build -x test
