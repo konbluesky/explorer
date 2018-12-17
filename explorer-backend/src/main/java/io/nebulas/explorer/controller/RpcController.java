@@ -80,13 +80,6 @@ public class RpcController {
     private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(20);
     private static final Base64.Decoder DECODER = Base64.getDecoder();
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public JsonResult justForTest() {
-        JsonResult result = JsonResult.success();
-        result.put("result", "Hello! Here is the message from Jenkins Build.");
-        return result;
-    }
-
     @RequestMapping(value = "/market_cap", method = RequestMethod.GET)
     public JsonResult marketCap() {
         return JsonResult.success(nebMarketCapitalizationService.getLatest());

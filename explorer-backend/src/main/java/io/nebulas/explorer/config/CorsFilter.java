@@ -25,13 +25,6 @@ import java.util.Set;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Configuration
 public class CorsFilter implements Filter {
-    private static final Set<String> DISALLOWED_METHOD = new HashSet<>();
-
-    static {
-        DISALLOWED_METHOD.add("OPTIONS");
-        //        DISALLOWED_METHOD.add("PUT");
-        //        DISALLOWED_METHOD.add("DELETE");
-    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -42,14 +35,10 @@ public class CorsFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
-        response.setHeader("Access-Control-Allow-Headers", "Origin, No-Cache, x-auth-token, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type,Authorization");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
         response.setHeader("Access-Control-Max-Age", "3600");
-        if (DISALLOWED_METHOD.contains(request.getMethod())) {
-            return;
-        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
